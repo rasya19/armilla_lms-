@@ -59,6 +59,15 @@ interface Nilai {
   tanggalSimulasi: string;
 }
 
+interface Tabungan {
+  id: string;
+  siswaId: string;
+  tanggal: string;
+  jumlah: number;
+  status: "Pending" | "Valid";
+  tenantId: string;
+}
+
 interface DB {
   siswa: Siswa[];
   guru: Guru[];
@@ -66,6 +75,7 @@ interface DB {
   kelas: Kelas[];
   ppdb: PPDB[];
   nilai: Nilai[];
+  tabungan: Tabungan[];
 }
 
 const DATA_DIR = path.join(process.cwd(), "data");
@@ -121,6 +131,13 @@ const INITIAL_DB: DB = {
     { id: "n10", siswaId: "s3", mapelId: "m2", nilaiMandiri: 72, nilaiSimulasi: 68, nilaiAkhir: 70, tanggalSimulasi: "2026-06-16" },
     { id: "n11", siswaId: "s3", mapelId: "m3", nilaiMandiri: 68, nilaiSimulasi: 70, nilaiAkhir: 69, tanggalSimulasi: "2026-06-17" },
     { id: "n12", siswaId: "s3", mapelId: "m4", nilaiMandiri: 75, nilaiSimulasi: 70, nilaiAkhir: 72.5, tanggalSimulasi: "2026-06-18" }
+  ],
+  tabungan: [
+    { id: "t1", siswaId: "s1", tanggal: "2026-07-10", jumlah: 50000, status: "Pending", tenantId: "tenant_armilla" },
+    { id: "t2", siswaId: "s2", tanggal: "2026-07-11", jumlah: 100000, status: "Pending", tenantId: "tenant_armilla" },
+    { id: "t3", siswaId: "s3", tanggal: "2026-07-12", jumlah: 25000, status: "Pending", tenantId: "tenant_armilla" },
+    { id: "t4", siswaId: "s4", tanggal: "2026-07-12", jumlah: 75000, status: "Pending", tenantId: "tenant_armilla" },
+    { id: "t5", siswaId: "s5", tanggal: "2026-07-13", jumlah: 150000, status: "Valid", tenantId: "tenant_armilla" }
   ]
 };
 
@@ -440,6 +457,58 @@ async function startServer() {
   // API - NILAI SIMULASI UNBK (CRUD + IMPORT & EXPORT)
   app.get("/api/nilai", (req, res) => {
     res.json(getDB().nilai);
+  });
+
+  // API - KEUANGAN / TABUNGAN
+  app.get("/api/keuangan/tabungan/pending", (req, res) => {
+    try {
+      const db = getDB();
+      // Simulasi filter by tenantId from header
+      const tenantId = req.headers['x-tenant-id'] || "tenant_armilla";
+      
+      const pendingTabungan = db.tabungan
+        .filter(t => t.status === "Pending" && t.tenantId === tenantId)
+        .map(t => {
+          const siswa = db.siswa.find(s => s.id === t.siswaId);
+          return {
+            ...t,
+            siswaNama: siswa?.nama || "Unknown",
+            siswaNisn: siswa?.nisn || "-"
+          };
+        });
+      
+      res.json({ data: pendingTabungan });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  app.post("/api/keuangan/tabungan/validasi-massal", (req, res) => {
+    try {
+      // Dalam implementasi nyata, di sini dicek JWT Role (Bendahara/SuperAdmin)
+      const { tabunganIds } = req.body;
+      const tenantId = req.headers['x-tenant-id'] || "tenant_armilla";
+
+      if (!Array.isArray(tabunganIds) || tabunganIds.length === 0) {
+        return res.status(400).json({ error: "tabunganIds harus berupa array yang tidak kosong." });
+      }
+
+      const db = getDB();
+      let updatedCount = 0;
+
+      db.tabungan = db.tabungan.map(t => {
+        if (tabunganIds.includes(t.id) && t.tenantId === tenantId && t.status === "Pending") {
+          updatedCount++;
+          return { ...t, status: "Valid" };
+        }
+        return t;
+      });
+
+      saveDB(db);
+      res.json({ message: `${updatedCount} data tabungan berhasil divalidasi.`, updatedCount });
+    } catch (err: any) {
+      res.status(500).json({ error: err.message });
+    }
   });
 
   app.post("/api/nilai", (req, res) => {

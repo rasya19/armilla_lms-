@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { 
   LayoutDashboard, Users, GraduationCap, BookOpen, ClipboardList, Award, 
-  Menu, X, RefreshCw, AlertCircle, Sparkles, LogOut, CheckCircle2
+  Menu, X, RefreshCw, AlertCircle, Sparkles, LogOut, CheckCircle2, ShieldAlert
 } from "lucide-react";
 
 import { Siswa, Guru, Mapel, Kelas, PPDB, Nilai, DashboardStats } from "./types";
@@ -11,6 +11,7 @@ import MasterGuru from "./components/MasterGuru";
 import MasterMapelKelas from "./components/MasterMapelKelas";
 import DataPPDB from "./components/DataPPDB";
 import RekapNilai from "./components/RekapNilai";
+import Keuangan from "./components/Keuangan";
 
 export default function App() {
   // Navigation State
@@ -236,6 +237,7 @@ export default function App() {
     { id: "mapelkelas", label: "Kurikulum & Kelas", icon: BookOpen },
     { id: "ppdb", label: "PPDB Online", icon: ClipboardList },
     { id: "nilai", label: "Nilai Simulasi UNBK", icon: Award },
+    { id: "keuangan", label: "Keuangan", icon: ShieldAlert },
   ];
 
   const handleNavigate = (viewId: string) => {
@@ -283,14 +285,21 @@ export default function App() {
                   <button
                     key={item.id}
                     onClick={() => handleNavigate(item.id)}
-                    className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-medium transition duration-200 ${
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded text-xs font-medium transition duration-200 ${
                       isActive 
                         ? "bg-blue-600 text-white font-semibold" 
                         : "hover:bg-slate-800 hover:text-white text-slate-400"
                     }`}
                   >
-                    <Icon size={14} className="shrink-0" />
-                    <span>{item.label}</span>
+                    <div className="flex items-center gap-3">
+                      <Icon size={14} className="shrink-0" />
+                      <span>{item.label}</span>
+                    </div>
+                    {item.id === "keuangan" && (
+                      <div className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center shrink-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                      </div>
+                    )}
                   </button>
                 );
               })}
@@ -340,14 +349,21 @@ export default function App() {
                       <button
                         key={item.id}
                         onClick={() => handleNavigate(item.id)}
-                        className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-semibold transition ${
+                        className={`w-full flex items-center justify-between px-3 py-2 rounded text-xs font-semibold transition ${
                           isActive 
                             ? "bg-blue-600 text-white" 
                             : "hover:bg-slate-800 hover:text-white text-slate-400"
                         }`}
                       >
-                        <Icon size={14} />
-                        <span>{item.label}</span>
+                        <div className="flex items-center gap-3">
+                          <Icon size={14} />
+                          <span>{item.label}</span>
+                        </div>
+                        {item.id === "keuangan" && (
+                          <div className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                          </div>
+                        )}
                       </button>
                     );
                   })}
@@ -494,6 +510,9 @@ export default function App() {
                     onDelete={handleDeleteNilai}
                     onBulkImport={handleBulkImportNilai}
                   />
+                )}
+                {currentView === "keuangan" && (
+                  <Keuangan />
                 )}
               </div>
             )}

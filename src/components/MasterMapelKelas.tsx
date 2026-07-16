@@ -160,85 +160,85 @@ export default function MasterMapelKelas({
   return (
     <div className="space-y-6" id="master-mapel-kelas-container">
       {/* Header */}
-      <div className="border-b border-slate-100 pb-5">
-        <h1 className="text-2xl font-bold text-slate-900">Kurikulum & Manajemen Kelas</h1>
-        <p className="text-sm text-slate-500">Kelola kurikulum mata pelajaran wajib serta konfigurasi kelas pengajaran</p>
+      <div className="border-b border-slate-200 pb-4">
+        <h1 className="text-xl font-bold text-slate-800">Kurikulum & Manajemen Kelas</h1>
+        <p className="text-xs text-slate-500 font-medium font-medium">Kelola kurikulum mata pelajaran wajib serta konfigurasi kelas pengajaran</p>
       </div>
 
       {/* Tabs Switcher */}
       <div className="flex border-b border-slate-200 gap-1" id="tabs-mapel-kelas">
         <button
           onClick={() => setActiveTab("mapel")}
-          className={`flex items-center gap-2 py-3 px-5 text-sm font-semibold border-b-2 transition duration-150 ${
+          className={`flex items-center gap-1.5 py-2 px-4 text-xs font-semibold border-b-2 transition duration-150 ${
             activeTab === "mapel"
-              ? "border-emerald-600 text-emerald-700"
+              ? "border-blue-600 text-blue-700"
               : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
-          <BookOpen size={16} /> Mata Pelajaran
+          <BookOpen size={14} /> Mata Pelajaran
         </button>
         <button
           onClick={() => setActiveTab("kelas")}
-          className={`flex items-center gap-2 py-3 px-5 text-sm font-semibold border-b-2 transition duration-150 ${
+          className={`flex items-center gap-1.5 py-2 px-4 text-xs font-semibold border-b-2 transition duration-150 ${
             activeTab === "kelas"
-              ? "border-emerald-600 text-emerald-700"
+              ? "border-blue-600 text-blue-700"
               : "border-transparent text-slate-500 hover:text-slate-800"
           }`}
         >
-          <Layers size={16} /> Manajemen Kelas
+          <Layers size={14} /> Manajemen Kelas
         </button>
       </div>
 
       {/* CONTENT TAB 1: MATA PELAJARAN */}
       {activeTab === "mapel" && (
-        <div className="space-y-4" id="tab-mapel-content">
+        <div className="space-y-3" id="tab-mapel-content">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Mata Pelajaran Ujian</h2>
-              <p className="text-xs text-slate-500">Daftar pelajaran wajib untuk simulasi kelulusan UNBK</p>
+              <h2 className="text-sm font-bold text-slate-800">Mata Pelajaran Ujian</h2>
+              <p className="text-[11px] text-slate-500">Daftar pelajaran wajib untuk simulasi kelulusan UNBK</p>
             </div>
             <button
               onClick={handleOpenAddMapel}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2 px-3.5 rounded-xl transition flex items-center gap-1.5 shadow-xs"
+              className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-1.5 px-3 rounded transition flex items-center gap-1 shadow-xs"
             >
-              <Plus size={14} /> Tambah Mapel
+              <Plus size={13} /> Tambah Mapel
             </button>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
+              <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-100 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                    <th className="py-4 px-6">Kode Mapel</th>
-                    <th className="py-4 px-6">Nama Pelajaran</th>
-                    <th className="py-4 px-6">Target KKM</th>
-                    <th className="py-4 px-6 text-right">Aksi</th>
+                  <tr className="border-b border-slate-200 bg-slate-50 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                    <th className="py-2.5 px-4">Kode Mapel</th>
+                    <th className="py-2.5 px-4">Nama Pelajaran</th>
+                    <th className="py-2.5 px-4">Target KKM</th>
+                    <th className="py-2.5 px-4 text-right">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
                   {mapelList.map((m) => (
                     <tr key={m.id} className="hover:bg-slate-50 transition">
-                      <td className="py-4 px-6">
-                        <span className="font-mono text-xs font-extrabold text-slate-800 bg-slate-100 px-2 py-1 rounded">
+                      <td className="py-2 px-4">
+                        <span className="font-mono text-xs font-extrabold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                           {m.kode}
                         </span>
                       </td>
-                      <td className="py-4 px-6 font-semibold text-slate-900">{m.nama}</td>
-                      <td className="py-4 px-6 font-mono text-slate-800 font-bold">{m.kkm}</td>
-                      <td className="py-4 px-6 text-right">
-                        <div className="flex items-center justify-end gap-2">
+                      <td className="py-2 px-4 font-semibold text-slate-900">{m.nama}</td>
+                      <td className="py-2 px-4 font-mono text-slate-800 font-bold">{m.kkm}</td>
+                      <td className="py-2 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => handleOpenEditMapel(m)}
-                            className="p-1.5 hover:bg-slate-100 text-slate-600 rounded-md transition"
+                            className="p-1 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded transition"
                           >
-                            <Edit2 size={15} />
+                            <Edit2 size={13} />
                           </button>
                           <button
                             onClick={() => handleDeleteMapel(m.id, m.nama)}
-                            className="p-1.5 hover:bg-red-50 text-red-600 rounded-md transition"
+                            className="p-1 hover:bg-red-50 text-red-600 rounded transition"
                           >
-                            <Trash2 size={15} />
+                            <Trash2 size={13} />
                           </button>
                         </div>
                       </td>
@@ -260,29 +260,29 @@ export default function MasterMapelKelas({
 
       {/* CONTENT TAB 2: MANAJEMEN KELAS */}
       {activeTab === "kelas" && (
-        <div className="space-y-4" id="tab-kelas-content">
+        <div className="space-y-3" id="tab-kelas-content">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-bold text-slate-900">Manajemen Kelas & Pembagian Wali</h2>
-              <p className="text-xs text-slate-500">Susun rombongan belajar dan delegasikan wali kelas</p>
+              <h2 className="text-sm font-bold text-slate-800">Manajemen Kelas & Pembagian Wali</h2>
+              <p className="text-[11px] text-slate-500">Susun rombongan belajar dan delegasikan wali kelas</p>
             </div>
             <button
               onClick={handleOpenAddKelas}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2 px-3.5 rounded-xl transition flex items-center gap-1.5 shadow-xs"
+              className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-1.5 px-3 rounded transition flex items-center gap-1 shadow-xs"
             >
-              <Plus size={14} /> Tambah Kelas
+              <Plus size={13} /> Tambah Kelas
             </button>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
+              <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-100 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                    <th className="py-4 px-6">Kode Rombel</th>
-                    <th className="py-4 px-6">Nama Kelas / Jenjang</th>
-                    <th className="py-4 px-6">Wali Kelas</th>
-                    <th className="py-4 px-6 text-right">Aksi</th>
+                  <tr className="border-b border-slate-200 bg-slate-50 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                    <th className="py-2.5 px-4">Kode Rombel</th>
+                    <th className="py-2.5 px-4">Nama Kelas / Jenjang</th>
+                    <th className="py-2.5 px-4">Wali Kelas</th>
+                    <th className="py-2.5 px-4 text-right">Aksi</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -290,28 +290,28 @@ export default function MasterMapelKelas({
                     const wali = guruList.find(g => g.id === k.waliGuruId);
                     return (
                       <tr key={k.id} className="hover:bg-slate-50 transition">
-                        <td className="py-4 px-6">
-                          <span className="font-mono text-xs font-semibold text-emerald-800 bg-emerald-50 px-2 py-1 rounded">
+                        <td className="py-2 px-4">
+                          <span className="font-mono text-xs font-semibold text-blue-800 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
                             {k.kode}
                           </span>
                         </td>
-                        <td className="py-4 px-6 font-semibold text-slate-900">{k.nama}</td>
-                        <td className="py-4 px-6 text-slate-700">
-                          {wali ? wali.nama : <span className="text-red-400 font-medium text-xs">Belum Ditentukan</span>}
+                        <td className="py-2 px-4 font-semibold text-slate-900">{k.nama}</td>
+                        <td className="py-2 px-4 text-slate-700">
+                          {wali ? wali.nama : <span className="text-red-500 font-medium text-[11px]">Belum Ditentukan</span>}
                         </td>
-                        <td className="py-4 px-6 text-right">
-                          <div className="flex items-center justify-end gap-2">
+                        <td className="py-2 px-4 text-right">
+                          <div className="flex items-center justify-end gap-1.5">
                             <button
                               onClick={() => handleOpenEditKelas(k)}
-                              className="p-1.5 hover:bg-slate-100 text-slate-600 rounded-md transition"
+                              className="p-1 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded transition"
                             >
-                              <Edit2 size={15} />
+                              <Edit2 size={13} />
                             </button>
                             <button
                               onClick={() => handleDeleteKelas(k.id, k.nama)}
-                              className="p-1.5 hover:bg-red-50 text-red-600 rounded-md transition"
+                              className="p-1 hover:bg-red-50 text-red-600 rounded transition"
                             >
-                              <Trash2 size={15} />
+                              <Trash2 size={13} />
                             </button>
                           </div>
                         </td>
@@ -335,25 +335,25 @@ export default function MasterMapelKelas({
       {/* Mapel Form Modal */}
       {isMapelModalOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h3 className="font-bold text-slate-900">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="bg-slate-50 px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+              <h3 className="font-bold text-slate-800 text-sm">
                 {editingMapel ? "Edit Mata Pelajaran" : "Tambah Mata Pelajaran"}
               </h3>
-              <button onClick={() => setIsMapelModalOpen(false)} className="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
-                <X size={18} />
+              <button onClick={() => setIsMapelModalOpen(false)} className="text-slate-400 hover:text-slate-600 p-1 rounded">
+                <X size={16} />
               </button>
             </div>
 
-            <form onSubmit={handleMapelSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleMapelSubmit} className="p-5 space-y-3.5 text-xs">
               {mapelError && (
-                <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-xl text-xs flex items-center gap-2">
-                  <AlertCircle size={16} className="shrink-0" />
+                <div className="bg-red-50 border border-red-200 text-red-700 p-2.5 rounded text-xs flex items-center gap-2">
+                  <AlertCircle size={14} className="shrink-0" />
                   <span>{mapelError}</span>
                 </div>
               )}
 
-              <div className="space-y-4">
+              <div className="space-y-3.5">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-600">Kode Pelajaran *</label>
                   <input
@@ -362,7 +362,7 @@ export default function MasterMapelKelas({
                     placeholder="Contoh: MTK, BIN, IPA"
                     value={formMapelKode}
                     onChange={(e) => setFormMapelKode(e.target.value.toUpperCase().replace(/\s/g, ""))}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
                   />
                 </div>
 
@@ -374,7 +374,7 @@ export default function MasterMapelKelas({
                     placeholder="Contoh: Matematika"
                     value={formMapelNama}
                     onChange={(e) => setFormMapelNama(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
                 </div>
 
@@ -387,24 +387,24 @@ export default function MasterMapelKelas({
                     max={100}
                     value={formMapelKKM}
                     onChange={(e) => setFormMapelKKM(Number(e.target.value))}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3.5 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setIsMapelModalOpen(false)}
-                  className="bg-slate-100 text-slate-700 text-xs font-semibold py-2 px-4 rounded-xl transition"
+                  className="bg-slate-100 text-slate-700 font-semibold py-1.5 px-3 rounded transition"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2 px-4 rounded-xl transition flex items-center gap-1.5"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded transition flex items-center gap-1"
                 >
-                  <Save size={14} /> Simpan Mapel
+                  <Save size={13} /> Simpan Mapel
                 </button>
               </div>
             </form>
@@ -415,25 +415,25 @@ export default function MasterMapelKelas({
       {/* Kelas Form Modal */}
       {isKelasModalOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h3 className="font-bold text-slate-900">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="bg-slate-50 px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+              <h3 className="font-bold text-slate-800 text-sm">
                 {editingKelas ? "Edit Rombongan Kelas" : "Tambah Rombongan Kelas"}
               </h3>
-              <button onClick={() => setIsKelasModalOpen(false)} className="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
-                <X size={18} />
+              <button onClick={() => setIsKelasModalOpen(false)} className="text-slate-400 hover:text-slate-600 p-1 rounded">
+                <X size={16} />
               </button>
             </div>
 
-            <form onSubmit={handleKelasSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleKelasSubmit} className="p-5 space-y-3.5 text-xs">
               {kelasError && (
-                <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-xl text-xs flex items-center gap-2">
-                  <AlertCircle size={16} className="shrink-0" />
+                <div className="bg-red-50 border border-red-200 text-red-700 p-2.5 rounded text-xs flex items-center gap-2">
+                  <AlertCircle size={14} className="shrink-0" />
                   <span>{kelasError}</span>
                 </div>
               )}
 
-              <div className="space-y-4">
+              <div className="space-y-3.5">
                 <div className="space-y-1">
                   <label className="text-xs font-semibold text-slate-600">Kode Rombel *</label>
                   <input
@@ -442,7 +442,7 @@ export default function MasterMapelKelas({
                     placeholder="Contoh: PKC-XII, PKB-IX"
                     value={formKelasKode}
                     onChange={(e) => setFormKelasKode(e.target.value.toUpperCase().replace(/\s/g, ""))}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
                   />
                 </div>
 
@@ -454,7 +454,7 @@ export default function MasterMapelKelas({
                     placeholder="Contoh: Paket C - Kelas XII"
                     value={formKelasNama}
                     onChange={(e) => setFormKelasNama(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   />
                 </div>
 
@@ -463,7 +463,7 @@ export default function MasterMapelKelas({
                   <select
                     value={formKelasWaliId}
                     onChange={(e) => setFormKelasWaliId(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   >
                     <option value="" disabled>Pilih Tenaga Pendidik...</option>
                     {guruList.map(g => (
@@ -473,19 +473,19 @@ export default function MasterMapelKelas({
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3.5 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setIsKelasModalOpen(false)}
-                  className="bg-slate-100 text-slate-700 text-xs font-semibold py-2 px-4 rounded-xl transition"
+                  className="bg-slate-100 text-slate-700 font-semibold py-1.5 px-3 rounded transition"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2 px-4 rounded-xl transition flex items-center gap-1.5"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded transition flex items-center gap-1"
                 >
-                  <Save size={14} /> Simpan Kelas
+                  <Save size={13} /> Simpan Kelas
                 </button>
               </div>
             </form>

@@ -248,8 +248,8 @@ export default function App() {
       
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-5 right-5 z-50 bg-slate-900 text-white py-3 px-5 rounded-2xl shadow-xl flex items-center gap-3 border border-slate-800 animate-in fade-in slide-in-from-bottom-5 duration-300">
-          <CheckCircle2 size={18} className="text-emerald-400 shrink-0" />
+        <div className="fixed bottom-5 right-5 z-50 bg-slate-900 text-white py-2 px-4 rounded-lg shadow-lg flex items-center gap-2.5 border border-slate-800 animate-in fade-in slide-in-from-bottom-5 duration-300">
+          <CheckCircle2 size={16} className="text-blue-400 shrink-0" />
           <span className="text-xs font-semibold">{toastMessage}</span>
         </div>
       )}
@@ -258,21 +258,24 @@ export default function App() {
       <div className="flex flex-1 relative">
         
         {/* SIDEBAR NAVIGATION - DESKTOP */}
-        <aside className="hidden lg:flex flex-col w-64 bg-slate-900 text-slate-300 border-r border-slate-800 shrink-0 p-5 justify-between">
-          <div className="space-y-6">
+        <aside className="hidden lg:flex flex-col w-64 bg-slate-900 text-slate-300 border-r border-slate-800 shrink-0 p-4 justify-between">
+          <div className="space-y-5">
             {/* Brand Logo */}
-            <div className="flex items-center gap-3 px-2 py-3 border-b border-slate-800">
-              <div className="w-9 h-9 bg-emerald-600 text-white rounded-xl flex items-center justify-center font-extrabold text-lg shadow-sm">
+            <div className="flex items-center gap-3 px-2 py-2 border-b border-slate-800">
+              <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center font-bold text-white text-base">
                 A
               </div>
               <div>
-                <h1 className="text-sm font-black text-white leading-tight tracking-wider uppercase">PKBM Armilla</h1>
-                <p className="text-[10px] text-emerald-400 font-semibold uppercase tracking-widest">Portal Manajemen</p>
+                <h1 className="text-sm font-bold text-white leading-tight tracking-tight">
+                  ARMILLA
+                  <span className="text-blue-400 text-[10px] block font-normal leading-none mt-0.5">Sistem Informasi PKBM</span>
+                </h1>
               </div>
             </div>
 
             {/* Nav Menu */}
-            <nav className="space-y-1.5">
+            <nav className="space-y-1">
+              <div className="text-slate-500 text-[10px] uppercase font-bold tracking-widest px-2 mb-2">Menu Utama</div>
               {navigationItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = currentView === item.id;
@@ -280,13 +283,13 @@ export default function App() {
                   <button
                     key={item.id}
                     onClick={() => handleNavigate(item.id)}
-                    className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition duration-200 ${
+                    className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-medium transition duration-200 ${
                       isActive 
-                        ? "bg-emerald-600 text-white" 
-                        : "hover:bg-slate-800/80 hover:text-white text-slate-400"
+                        ? "bg-blue-600 text-white font-semibold" 
+                        : "hover:bg-slate-800 hover:text-white text-slate-400"
                     }`}
                   >
-                    <Icon size={16} />
+                    <Icon size={14} className="shrink-0" />
                     <span>{item.label}</span>
                   </button>
                 );
@@ -295,13 +298,13 @@ export default function App() {
           </div>
 
           {/* Footer Brand Info */}
-          <div className="border-t border-slate-800/80 pt-4 space-y-2">
-            <div className="bg-slate-950/40 p-3 rounded-xl border border-slate-800/50 flex items-center gap-2">
-              <Sparkles size={14} className="text-yellow-400" />
-              <span className="text-[10px] font-semibold text-slate-400">Senior Architect Panel</span>
+          <div className="p-3 bg-slate-800/50 rounded-lg mt-auto space-y-2">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-400"></div>
+              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">System Status: OK</span>
             </div>
-            <div className="text-[9px] text-slate-500 text-center">
-              © 2026 PKBM Armilla v2.0
+            <div className="text-[9px] text-slate-500 font-mono">
+              v2.4.0-stable | API: 3000
             </div>
           </div>
         </aside>
@@ -313,14 +316,14 @@ export default function App() {
             <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" onClick={() => setMobileMenuOpen(false)}></div>
             
             {/* Drawer */}
-            <div className="relative w-64 bg-slate-900 text-slate-300 p-5 flex flex-col justify-between z-10 animate-in slide-in-from-left duration-200">
-              <div className="space-y-6">
+            <div className="relative w-64 bg-slate-900 text-slate-300 p-4 flex flex-col justify-between z-10 animate-in slide-in-from-left duration-200">
+              <div className="space-y-5">
                 <div className="flex items-center justify-between border-b border-slate-800 pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 bg-emerald-600 text-white rounded-lg flex items-center justify-center font-extrabold text-sm">
+                    <div className="w-8 h-8 bg-blue-500 text-white rounded flex items-center justify-center font-bold text-sm">
                       A
                     </div>
-                    <span className="text-xs font-black text-white uppercase tracking-wider">PKBM Armilla</span>
+                    <span className="text-xs font-bold text-white uppercase tracking-wider">ARMILLA</span>
                   </div>
                   <button onClick={() => setMobileMenuOpen(false)} className="text-slate-400 hover:text-white p-1">
                     <X size={18} />
@@ -328,7 +331,8 @@ export default function App() {
                 </div>
 
                 {/* Nav items */}
-                <nav className="space-y-1.5">
+                <nav className="space-y-1">
+                  <div className="text-slate-500 text-[10px] uppercase font-bold tracking-widest px-2 mb-2">Menu Utama</div>
                   {navigationItems.map((item) => {
                     const Icon = item.icon;
                     const isActive = currentView === item.id;
@@ -336,13 +340,13 @@ export default function App() {
                       <button
                         key={item.id}
                         onClick={() => handleNavigate(item.id)}
-                        className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-bold transition ${
+                        className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-semibold transition ${
                           isActive 
-                            ? "bg-emerald-600 text-white" 
+                            ? "bg-blue-600 text-white" 
                             : "hover:bg-slate-800 hover:text-white text-slate-400"
                         }`}
                       >
-                        <Icon size={16} />
+                        <Icon size={14} />
                         <span>{item.label}</span>
                       </button>
                     );
@@ -350,8 +354,8 @@ export default function App() {
                 </nav>
               </div>
 
-              <div className="text-[9px] text-slate-500 text-center">
-                © 2026 PKBM Armilla
+              <div className="text-[9px] text-slate-500 text-center font-mono">
+                v2.4.0-stable | © 2026
               </div>
             </div>
           </div>
@@ -361,7 +365,7 @@ export default function App() {
         <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
           
           {/* TOP BAR / NAVIGATION HEADER */}
-          <header className="bg-white border-b border-slate-100 px-6 py-4 flex items-center justify-between sticky top-0 z-30 shadow-xs" id="app-header">
+          <header className="bg-white border-b border-slate-200 px-6 py-3.5 flex items-center justify-between sticky top-0 z-30 shadow-xs" id="app-header">
             <div className="flex items-center gap-3">
               {/* Menu Button for Mobile */}
               <button 
@@ -371,40 +375,40 @@ export default function App() {
                 <Menu size={20} />
               </button>
 
-              <div className="hidden sm:block">
-                <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest font-mono">Pendidikan Kesetaraan</span>
-                <h2 className="text-xs font-bold text-slate-700">Bandung, Jawa Barat</h2>
+              <div>
+                <h1 className="text-base font-extrabold text-slate-800 tracking-tight">Sistem Informasi Manajemen PKBM</h1>
+                <p className="text-[10px] text-slate-400 font-mono">Pendidikan Kesetaraan Bandung, Jawa Barat</p>
               </div>
             </div>
 
             {/* Sync actions status */}
             <div className="flex items-center gap-3">
               {isMutating && (
-                <span className="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-1 rounded-md animate-pulse">
-                  Sinkronisasi database...
+                <span className="text-[10px] bg-blue-50 text-blue-700 font-mono font-bold px-2 py-1 rounded border border-blue-100 animate-pulse">
+                  SYNCING_DB...
                 </span>
               )}
               
               <button
                 onClick={refreshAllData}
                 disabled={isLoading}
-                className="p-1.5 text-slate-500 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 rounded-xl transition flex items-center gap-1.5 text-xs font-semibold"
+                className="p-1.5 text-slate-500 hover:text-slate-900 border border-slate-200 hover:bg-slate-50 rounded transition flex items-center gap-1.5 text-xs font-semibold"
                 title="Penyelarasan Data"
               >
-                <RefreshCw size={14} className={isLoading ? "animate-spin" : ""} />
-                <span className="hidden md:inline">Sync Data</span>
+                <RefreshCw size={12} className={isLoading ? "animate-spin" : ""} />
+                <span className="hidden md:inline font-mono text-[11px]">Refresh Data</span>
               </button>
 
-              <div className="w-px h-6 bg-slate-200"></div>
+              <div className="w-px h-5 bg-slate-200"></div>
 
               {/* User Identity Profile */}
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white font-mono font-bold text-xs">
-                  SA
+                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-mono font-bold text-xs border border-blue-200">
+                  AD
                 </div>
                 <div className="hidden md:block text-left">
-                  <div className="text-xs font-bold text-slate-900 leading-tight">Ismanto (Admin)</div>
-                  <div className="text-[9px] text-slate-400 font-semibold">Senior Developer</div>
+                  <div className="text-xs font-bold text-slate-800 leading-tight">Admin (Ismanto)</div>
+                  <div className="text-[9px] text-slate-400 font-mono font-medium">NEXT_PUBLIC_API_URL: 3000</div>
                 </div>
               </div>
             </div>
@@ -423,9 +427,9 @@ export default function App() {
             )}
 
             {isLoading && (
-              <div className="flex flex-col items-center justify-center py-24 space-y-4" id="app-loading">
-                <RefreshCw size={40} className="text-emerald-600 animate-spin" />
-                <div className="text-slate-500 text-sm font-semibold">Sinkronisasi Database PKBM Armilla...</div>
+              <div className="flex flex-col items-center justify-center py-24 space-y-3" id="app-loading">
+                <RefreshCw size={36} className="text-blue-600 animate-spin" />
+                <div className="text-slate-500 text-xs font-semibold font-mono tracking-tight">LOADING_PKBM_DATABASE...</div>
               </div>
             )}
 

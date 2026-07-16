@@ -325,19 +325,19 @@ export default function RekapNilai({
   return (
     <div className="space-y-6" id="rekap-nilai-container">
       {/* Header and Action Button Row */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Nilai Hasil Simulasi UNBK</h1>
-          <p className="text-sm text-slate-500">Rekapitulasi nilai ujian mandiri, skor simulasi UNBK, kalkulasi nilai akhir dan export/import</p>
+          <h1 className="text-xl font-bold text-slate-800">Nilai Hasil Simulasi UNBK</h1>
+          <p className="text-xs text-slate-500 font-medium">Rekapitulasi nilai ujian mandiri, skor simulasi UNBK, kalkulasi nilai akhir dan export/import</p>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-1.5 text-xs font-semibold">
           {/* Export */}
           <button
             onClick={handleExportCSV}
-            className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs font-semibold py-2.5 px-3.5 rounded-xl transition flex items-center gap-1.5 shadow-xs"
+            className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 py-1.5 px-3 rounded transition flex items-center gap-1 shadow-xs"
             title="Download CSV"
           >
-            <Download size={15} /> Export CSV
+            <Download size={13} /> Export CSV
           </button>
 
           {/* Open Import */}
@@ -348,41 +348,41 @@ export default function RekapNilai({
               setImportSuccessMessage("");
               setParsedRows([]);
             }}
-            className="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold py-2.5 px-3.5 rounded-xl transition flex items-center gap-1.5"
+            className="bg-slate-100 hover:bg-slate-200 text-slate-800 py-1.5 px-3 rounded transition flex items-center gap-1"
           >
-            <Upload size={15} /> Import Rekap
+            <Upload size={13} /> Import Rekap
           </button>
 
           {/* Add score manually */}
           <button
             onClick={handleOpenAdd}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2.5 px-4 rounded-xl transition flex items-center gap-1.5 shadow-xs"
+            className="bg-blue-600 hover:bg-blue-700 text-white py-1.5 px-3 rounded transition flex items-center gap-1 shadow-xs"
           >
-            <Plus size={15} /> Input Manual
+            <Plus size={13} /> Input Manual
           </button>
         </div>
       </div>
 
       {/* CSV Import Panel */}
       {isImportOpen && (
-        <div className="bg-emerald-50/50 border border-emerald-100 p-6 rounded-2xl space-y-4 animate-in slide-in-from-top-4 duration-200" id="import-panel">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-emerald-100/60 pb-3 gap-2">
-            <div className="flex items-center gap-2">
-              <FileSpreadsheet className="text-emerald-700" size={20} />
-              <h3 className="font-extrabold text-slate-900 text-sm">Bulk Import Rekap Nilai Simulasi UNBK via CSV</h3>
+        <div className="bg-blue-50/40 border border-blue-200 p-5 rounded-lg space-y-3.5 animate-in slide-in-from-top-4 duration-200" id="import-panel">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-blue-200/60 pb-2.5 gap-2 text-xs">
+            <div className="flex items-center gap-1.5">
+              <FileSpreadsheet className="text-blue-700" size={18} />
+              <h3 className="font-extrabold text-slate-800 text-xs uppercase tracking-wide">Bulk Import Rekap Nilai Simulasi UNBK via CSV</h3>
             </div>
             <button 
               onClick={handleDownloadTemplate}
-              className="text-emerald-700 hover:text-emerald-800 text-xs font-semibold underline flex items-center gap-1"
+              className="text-blue-700 hover:text-blue-800 font-semibold underline flex items-center gap-1"
             >
               Unduh Template Contoh.csv
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="space-y-2 md:col-span-1">
-              <span className="text-xs font-bold text-slate-700 block uppercase tracking-wider">Langkah-langkah:</span>
-              <ol className="text-xs text-slate-600 space-y-2 list-decimal list-inside pl-1 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs">
+            <div className="space-y-1.5 md:col-span-1">
+              <span className="font-bold text-slate-700 block uppercase tracking-wider text-[10px]">Langkah-langkah:</span>
+              <ol className="text-slate-600 space-y-1 list-decimal list-inside pl-1 leading-relaxed">
                 <li>Unduh template CSV yang disediakan.</li>
                 <li>Isi data siswa menggunakan kolom <strong>NISN</strong> siswa aktif di sistem.</li>
                 <li>Gunakan <strong>KodeMapel</strong> kurikulum (Contoh: <code className="bg-slate-100 text-slate-800 px-1 font-mono rounded">MTK</code>, <code className="bg-slate-100 text-slate-800 px-1 font-mono rounded">BIN</code>).</li>
@@ -390,20 +390,20 @@ export default function RekapNilai({
               </ol>
             </div>
 
-            <div className="md:col-span-2 space-y-3 flex flex-col justify-center border-l border-emerald-100/60 md:pl-6">
+            <div className="md:col-span-2 space-y-3 flex flex-col justify-center border-l border-slate-200 md:pl-5">
               <div className="flex items-center gap-3">
                 <input
                   type="file"
                   ref={fileInputRef}
                   accept=".csv"
                   onChange={handleFileChange}
-                  className="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 hover:file:bg-emerald-200 cursor-pointer"
+                  className="block w-full text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-blue-100 file:text-blue-800 hover:file:bg-blue-200 cursor-pointer"
                 />
               </div>
 
               {/* Error log inside panel */}
               {importErrors.length > 0 && (
-                <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-xl text-xs space-y-1">
+                <div className="bg-red-50 border border-red-200 text-red-700 p-2.5 rounded text-xs space-y-1">
                   <span className="font-bold flex items-center gap-1.5"><AlertCircle size={14} /> Terjadi Kendala Validasi Berkas:</span>
                   <div className="max-h-24 overflow-y-auto pl-5 list-disc space-y-0.5 font-mono">
                     {importErrors.map((err, i) => <div key={i}>{err}</div>)}
@@ -413,11 +413,11 @@ export default function RekapNilai({
 
               {/* Parsed Rows preview */}
               {parsedRows.length > 0 && (
-                <div className="space-y-2 bg-white border border-slate-100 p-3 rounded-xl">
+                <div className="space-y-2 bg-white border border-slate-200 p-2.5 rounded">
                   <span className="text-xs font-semibold text-slate-700 block">Validasi Sukses: {parsedRows.length} Baris data siap diproses</span>
                   <button
                     onClick={handleImportSubmit}
-                    className="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-lg transition"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-1.5 rounded transition"
                   >
                     Proses Unggah & Sinkronisasi
                   </button>
@@ -425,8 +425,8 @@ export default function RekapNilai({
               )}
 
               {importSuccessMessage && (
-                <div className="bg-green-50 border border-green-200 text-green-700 p-3 rounded-xl text-xs flex items-center gap-2 font-medium">
-                  <CheckCircle size={16} className="text-green-600 shrink-0" />
+                <div className="bg-green-50 border border-green-200 text-green-700 p-2.5 rounded text-xs flex items-center gap-2 font-medium">
+                  <CheckCircle size={14} className="text-green-600 shrink-0" />
                   <span>{importSuccessMessage}</span>
                 </div>
               )}
@@ -436,33 +436,33 @@ export default function RekapNilai({
       )}
 
       {/* Mini Stats Summary Boxes */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4" id="stats-nilai">
-        <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
-          <span className="text-xs font-semibold text-slate-400">Total Rekor Terbaca</span>
-          <h3 className="text-xl font-bold text-slate-800 font-mono mt-1">{totalRecords}</h3>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5" id="stats-nilai">
+        <div className="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Total Rekor Terbaca</span>
+          <h3 className="text-lg font-bold text-slate-800 font-mono mt-0.5">{totalRecords}</h3>
         </div>
-        <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
-          <span className="text-xs font-semibold text-slate-400">Rata-rata Nilai Akhir</span>
-          <h3 className="text-xl font-bold text-emerald-600 font-mono mt-1">{averageAkhir} <span className="text-xs text-slate-400 font-normal">/100</span></h3>
+        <div className="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Rata-rata Nilai Akhir</span>
+          <h3 className="text-lg font-bold text-blue-600 font-mono mt-0.5">{averageAkhir} <span className="text-xs text-slate-400 font-normal">/100</span></h3>
         </div>
-        <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
-          <span className="text-xs font-semibold text-slate-400">Skor Simulasi Tertinggi</span>
-          <h3 className="text-xl font-bold text-slate-800 font-mono mt-1">{highSimulasi}</h3>
+        <div className="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Skor Simulasi Tertinggi</span>
+          <h3 className="text-lg font-bold text-slate-800 font-mono mt-0.5">{highSimulasi}</h3>
         </div>
-        <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-xs">
-          <span className="text-xs font-semibold text-slate-400">Tingkat Kelulusan KKM</span>
-          <h3 className="text-xl font-bold text-slate-800 font-mono mt-1">{passingRate}%</h3>
+        <div className="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tingkat Kelulusan KKM</span>
+          <h3 className="text-lg font-bold text-slate-800 font-mono mt-0.5">{passingRate}%</h3>
         </div>
       </div>
 
       {/* Filter and Search Section */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-xs flex flex-col sm:flex-row gap-4" id="filters-nilai">
+      <div className="bg-white p-3 rounded-lg border border-slate-200 shadow-xs flex flex-col sm:flex-row gap-3" id="filters-nilai">
         {/* Filter Siswa */}
         <div className="flex-1">
           <select
             value={selectedSiswaId}
             onChange={(e) => setSelectedSiswaId(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3.5 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded py-2 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
           >
             <option value="">Semua Siswa Terdaftar</option>
             {siswaList.map(s => (
@@ -472,11 +472,11 @@ export default function RekapNilai({
         </div>
 
         {/* Filter Mapel */}
-        <div className="w-full sm:w-64">
+        <div className="w-full sm:w-56">
           <select
             value={selectedMapelId}
             onChange={(e) => setSelectedMapelId(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2.5 px-3.5 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded py-2 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
           >
             <option value="">Semua Mata Pelajaran</option>
             {mapelList.map(m => (
@@ -487,18 +487,18 @@ export default function RekapNilai({
       </div>
 
       {/* Scores Table */}
-      <div className="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden" id="nilai-table-card">
+      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden" id="nilai-table-card">
         <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-left text-sm" id="table-nilai">
+          <table className="w-full border-collapse text-left text-xs" id="table-nilai">
             <thead>
-              <tr className="border-b border-slate-100 bg-slate-50 text-xs font-semibold uppercase tracking-wider text-slate-500">
-                <th className="py-4 px-6">Identitas Siswa</th>
-                <th className="py-4 px-6">Mata Pelajaran</th>
-                <th className="py-4 px-6">Ujian Mandiri (50%)</th>
-                <th className="py-4 px-6">Simulasi UNBK (50%)</th>
-                <th className="py-4 px-6">Nilai Akhir (Rata)</th>
-                <th className="py-4 px-6">Status KKM</th>
-                <th className="py-4 px-6 text-right">Aksi</th>
+              <tr className="border-b border-slate-200 bg-slate-50 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                <th className="py-3 px-4">Identitas Siswa</th>
+                <th className="py-3 px-4">Mata Pelajaran</th>
+                <th className="py-3 px-4">Ujian Mandiri (50%)</th>
+                <th className="py-3 px-4">Simulasi UNBK (50%)</th>
+                <th className="py-3 px-4">Nilai Akhir (Rata)</th>
+                <th className="py-3 px-4">Status KKM</th>
+                <th className="py-3 px-4 text-right">Aksi</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -510,40 +510,40 @@ export default function RekapNilai({
 
                 return (
                   <tr key={nilai.id} className="hover:bg-slate-50 transition duration-150">
-                    <td className="py-4 px-6">
+                    <td className="py-2.5 px-4">
                       <div className="font-semibold text-slate-900">{siswa ? siswa.nama : "Siswa Tidak Ditemukan"}</div>
-                      <div className="text-xs font-mono text-slate-400 mt-0.5">NISN: {siswa ? siswa.nisn : "-"}</div>
+                      <div className="text-[10px] font-mono text-slate-400 mt-0.5">NISN: {siswa ? siswa.nisn : "-"}</div>
                     </td>
-                    <td className="py-4 px-6">
+                    <td className="py-2.5 px-4">
                       <div className="font-semibold text-slate-800">{mapel ? mapel.nama : "Mapel Terhapus"}</div>
-                      <div className="text-xs font-mono text-slate-400 mt-0.5">Kode: {mapel ? mapel.kode : "-"}</div>
+                      <div className="text-[10px] font-mono text-slate-400 mt-0.5">Kode: {mapel ? mapel.kode : "-"}</div>
                     </td>
-                    <td className="py-4 px-6 font-mono text-slate-600">{nilai.nilaiMandiri}</td>
-                    <td className="py-4 px-6 font-mono text-slate-600">{nilai.nilaiSimulasi}</td>
-                    <td className="py-4 px-6 font-mono font-bold text-slate-900 text-sm">{nilai.nilaiAkhir}</td>
-                    <td className="py-4 px-6">
-                      <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold ${
-                        isPassed ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"
+                    <td className="py-2.5 px-4 font-mono text-slate-600">{nilai.nilaiMandiri}</td>
+                    <td className="py-2.5 px-4 font-mono text-slate-600">{nilai.nilaiSimulasi}</td>
+                    <td className="py-2.5 px-4 font-mono font-bold text-slate-900 text-sm">{nilai.nilaiAkhir}</td>
+                    <td className="py-2.5 px-4">
+                      <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase border ${
+                        isPassed ? "bg-green-50 text-green-700 border-green-200" : "bg-red-50 text-red-700 border-red-200"
                       }`}>
-                        <span className={`w-1.5 h-1.5 rounded-full ${isPassed ? "bg-green-600" : "bg-red-600"}`}></span>
+                        <span className={`w-1 h-1 rounded-full ${isPassed ? "bg-green-600" : "bg-red-600"}`}></span>
                         {isPassed ? "Lulus KKM" : `Di bawah KKM (${kkm})`}
                       </span>
                     </td>
-                    <td className="py-4 px-6 text-right">
+                    <td className="py-2.5 px-4 text-right">
                       <div className="flex items-center justify-end gap-1">
                         <button
                           onClick={() => handleOpenEdit(nilai)}
-                          className="p-1.5 hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-lg transition"
+                          className="p-1 hover:bg-slate-100 text-slate-500 hover:text-slate-800 rounded transition"
                           title="Edit Nilai"
                         >
-                          <Edit2 size={15} />
+                          <Edit2 size={13} />
                         </button>
                         <button
                           onClick={() => handleDeleteClick(nilai.id, siswa?.nama || "Siswa", mapel?.nama || "Pelajaran")}
-                          className="p-1.5 hover:bg-red-50 text-red-600 hover:text-red-800 rounded-lg transition"
+                          className="p-1 hover:bg-red-50 text-red-600 hover:text-red-800 rounded transition"
                           title="Hapus Nilai"
                         >
-                          <Trash2 size={15} />
+                          <Trash2 size={13} />
                         </button>
                       </div>
                     </td>
@@ -554,8 +554,8 @@ export default function RekapNilai({
               {filteredNilai.length === 0 && (
                 <tr>
                   <td colSpan={7} className="py-12 text-center text-slate-400">
-                    <AlertCircle size={36} className="mx-auto mb-2 opacity-50" />
-                    <p className="text-sm">Tidak ada rekam nilai yang sesuai filter pencarian.</p>
+                    <AlertCircle size={30} className="mx-auto mb-2 opacity-50 text-blue-500" />
+                    <p className="text-xs">Tidak ada rekam nilai yang sesuai filter pencarian.</p>
                   </td>
                 </tr>
               )}
@@ -567,22 +567,22 @@ export default function RekapNilai({
       {/* CRUD Modal Dialog */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-xs">
-          <div className="bg-white rounded-2xl border border-slate-100 shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
             {/* Header */}
-            <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h3 className="font-bold text-slate-900">
+            <div className="bg-slate-50 px-5 py-3 border-b border-slate-200 flex items-center justify-between">
+              <h3 className="font-bold text-slate-800 text-sm">
                 {editingNilai ? "Edit Rekaman Nilai Ujian" : "Input Manual Nilai Ujian"}
               </h3>
-              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition p-1 rounded-lg">
-                <X size={18} />
+              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-slate-600 transition p-1 rounded">
+                <X size={16} />
               </button>
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+            <form onSubmit={handleSubmit} className="p-5 space-y-3.5 text-xs">
               {formError && (
-                <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-xl text-xs flex items-center gap-2">
-                  <AlertCircle size={16} className="shrink-0" />
+                <div className="bg-red-50 border border-red-200 text-red-700 p-2.5 rounded text-xs flex items-center gap-2">
+                  <AlertCircle size={14} className="shrink-0" />
                   <span>{formError}</span>
                 </div>
               )}
@@ -595,7 +595,7 @@ export default function RekapNilai({
                     value={formSiswaId}
                     onChange={(e) => setFormSiswaId(e.target.value)}
                     disabled={editingNilai != null}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   >
                     <option value="" disabled>Pilih Siswa Terdaftar...</option>
                     {siswaList.map(s => (
@@ -611,7 +611,7 @@ export default function RekapNilai({
                     value={formMapelId}
                     disabled={editingNilai != null}
                     onChange={(e) => setFormMapelId(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
                   >
                     <option value="" disabled>Pilih Pelajaran...</option>
                     {mapelList.map(m => (
@@ -620,7 +620,7 @@ export default function RekapNilai({
                   </select>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3.5">
                   {/* Nilai Mandiri */}
                   <div className="space-y-1">
                     <label className="text-xs font-semibold text-slate-600">Nilai Mandiri (50%)</label>
@@ -630,7 +630,7 @@ export default function RekapNilai({
                       max={100}
                       value={formNilaiMandiri}
                       onChange={(e) => setFormNilaiMandiri(Number(e.target.value))}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                      className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
                     />
                   </div>
 
@@ -643,7 +643,7 @@ export default function RekapNilai({
                       max={100}
                       value={formNilaiSimulasi}
                       onChange={(e) => setFormNilaiSimulasi(Number(e.target.value))}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                      className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
                     />
                   </div>
                 </div>
@@ -656,25 +656,25 @@ export default function RekapNilai({
                     required
                     value={formTanggal}
                     onChange={(e) => setFormTanggal(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 px-3 text-sm text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 font-mono"
+                    className="w-full bg-slate-50 border border-slate-200 rounded py-1.5 px-2.5 text-xs text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-mono"
                   />
                 </div>
               </div>
 
               {/* Actions Footer */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+              <div className="flex items-center justify-end gap-2 pt-3.5 border-t border-slate-200">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="bg-slate-100 text-slate-700 text-xs font-semibold py-2 px-4 rounded-xl transition"
+                  className="bg-slate-100 text-slate-700 font-semibold py-1.5 px-3 rounded transition"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2 px-4 rounded-xl transition flex items-center gap-1.5"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded transition flex items-center gap-1"
                 >
-                  <Save size={14} /> Simpan Nilai
+                  <Save size={13} /> Simpan Nilai
                 </button>
               </div>
             </form>
